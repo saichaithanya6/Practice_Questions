@@ -2,13 +2,12 @@ Question1:
 Table: Patients
 
 
-+--------------+---------+
-| Column Name  | Type    |
-+--------------+---------+
-| patient_id   | int     |
-| patient_name | varchar |
-| conditions   | varchar |
-+--------------+---------+
+
+Column Name  | Type    
+patient_id   : int     
+patient_name : varchar 
+conditions   : varchar 
+
 
 
 
