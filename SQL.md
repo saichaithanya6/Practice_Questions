@@ -1,3 +1,4 @@
+Question1:
 Table: Patients
 
 +--------------+---------+
@@ -10,7 +11,6 @@ Table: Patients
 patient_id is the primary key (column with unique values) for this table.
 'conditions' contains 0 or more code separated by spaces. 
 This table contains information of the patients in the hospital.
- 
 Write a solution to find the patient_id, patient_name, and conditions of the patients who have Type I Diabetes. Type I Diabetes always starts with DIAB1 prefix.
 
 
@@ -18,3 +18,5 @@ Solution:
 SELECT patient_id , patient_name, conditions
 FROM Patients
 WHERE conditions like "DIAB1%" OR conditions like "% DIAB1%"
+
+
