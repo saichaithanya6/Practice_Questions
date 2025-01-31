@@ -1,6 +1,5 @@
-Question1:
+### Question1:
 Table: Patients
-
 Column Name  | Type    
 patient_id   : int     
 patient_name : varchar 
@@ -18,9 +17,8 @@ FROM Patients
 WHERE conditions like "DIAB1%" OR conditions like "% DIAB1%"
 
 
-Question2:
+### Question2:
 Table: Employee
-
 Column Name | Type 
 id          | int  
 salary      | int  
