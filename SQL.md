@@ -1,6 +1,7 @@
 ### Question1:
 Table: Patients
-Column Name  | Type    
+Column Name  | Type
+
 patient_id   : int     
 patient_name : varchar 
 conditions   : varchar 
