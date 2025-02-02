@@ -177,7 +177,7 @@ class Solution(object):
         return sign * result
 ```
 
-## Question 5:
+## Question 6:
 Write a function to find the longest common prefix string amongst an array of strings. 
 Example 1: Input: strs = ["flower","flow","flight"] Output: "fl"
 
@@ -197,3 +197,60 @@ class Solution(object):
         return p
 ```
 
+## Question 7:
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+Example 1- Input: nums = [-1,0,1,2,-1,-4] Output: [[-1,-1,2],[-1,0,1]] Explanation: nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+```go
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        ans = []
+        nums.sort()
+        n = len(nums)
+        for i in range(n):
+            if i > 0 and nums[i-1] == nums[i]:
+                continue
+            j = i+1
+            k = n-1
+            while j < k:
+                temp = nums[i]+ nums[j]+ nums[k]
+                if temp == 0:
+                    ans.append([nums[i], nums[j], nums[k]])
+                    j += 1
+                    while nums[j-1] == nums[j] and j<k:
+                        j+= 1
+                elif temp > 0:
+                    k -= 1
+                else:
+                    j += 1
+        return ans
+```
+
+## Question 8: Container With Most Water
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+```go
+class Solution(object):
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        area = 0
+        n = len(height)
+        i = 0
+        j = n -1
+
+        while j > i:
+            area = max(area, abs(j - i)*(min(height[i], height[j])))
+            if height[i] > height[j]:
+                j -= 1
+            else:
+                i += 1
+        return area
+```
