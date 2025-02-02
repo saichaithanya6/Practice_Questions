@@ -106,6 +106,94 @@ Roman numerals are formed by appending the conversions of decimal place values f
         for i in range(len(conversion)):
             while num >= conversion[i][0]:
                 output += conversion[i][1]
-                num -= conversion[i][1]
+                num -= conversion[i][0]
         return output
 ```
+
+
+## Question 4:
+Example 1:
+
+- Input: s = "babad"
+- Output: "bab"
+- Explanation: "aba" is also a valid answer.
+
+```go
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        if len(s) <= 1:
+            return s
+        output = s[0]
+        maxlen = 1
+        for i in range(len(s)-1):
+            for j in range(i+1, len(s)):
+                if j-i+1 > maxlen and s[i:j+1] == s[i:j+1][::-1]:
+                    output= s[i:j+1]
+                    maxlen = j - i + 1
+        return output
+```
+
+## Question 5:
+Convert a string to a 32-bit signed integer.
+- Determine the sign by checking if the next character is '-' or '+'
+- Ignore any leading whitespace (" ")
+- Read the integer by skipping leading zeros until a non-digit character is encountered. Range is [-231, 231 - 1]
+
+Example 1: Input: s = "42". Output: 42.
+
+Example 2: Input: s = " -042" Output: -42.
+
+Example 3: Input: s = "words and 987" Output: 0.
+
+```go
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+#Removes spaces in the string
+        s = s.strip() 
+        if not s:
+            return 0
+        i = 0
+        sign = 1
+        result = 0
+        if s[i] == '-' or s[i] == '+':
+#Checks if the first character is + or -
+            sign = -1 if s[i] == '-' else 1
+            i+= 1
+        while i < len(s) and s[i].isdigit():
+            digit = int(s[i])
+            if (result > (2 ** 31 - 1 - digit) // 10):
+#If the result is greater than 2** 31 then return the same
+                return 2 ** 31 - 1 if sign == 1 else -2**31
+            result = result * 10 + digit
+            i += 1
+        return sign * result
+```
+
+## Question 5:
+Write a function to find the longest common prefix string amongst an array of strings. 
+Example 1: Input: strs = ["flower","flow","flight"] Output: "fl"
+
+```go
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        # First decide a base string from the list
+        p = strs[0]
+
+        for i in strs[1:]:
+            while not i.startswith(p):
+                p = p[:-1]
+        return p
+```
+
