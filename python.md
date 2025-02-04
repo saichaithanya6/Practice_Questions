@@ -254,3 +254,24 @@ class Solution(object):
                 i += 1
         return area
 ```
+## Question 9: 
+![image](https://github.com/user-attachments/assets/206f4b73-a0b8-44d3-b161-e287e13a245b)
+```go
+def valid_emails(users: pd.DataFrame) -> pd.DataFrame:
+    valid_emails_df = users[users['mail'].str.match(r'^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\.com$', na= False)]
+    
+    return valid_emails_df
+```
+We created a dataframe that has matching strings starting with letters, nums, few special characters. * before @leetcode[.]com allows multiple valid characters before the @.
+We can use [.] or \. for retriving exactly the dot. $ states that the @leetcode.com should be the ending string.
+
+## Question 10
+Write a solution to find the ids of products that are both low fat and recyclable.
+Return the result table in any order.
+![image](https://github.com/user-attachments/assets/0fd347e0-a2c0-48b6-a5e4-4d30819c13aa)
+```go
+def find_products(products: pd.DataFrame) -> pd.DataFrame:
+    return products[(products['low_fats']== 'Y') & (products['recyclable']== 'Y')][['product_id']]
+```
+
+
