@@ -1,5 +1,5 @@
 ### Notes:
-Different date extractions with MySQL:
+Different date extractions with **MySQL**:
 
 - Extracting Date from a Datetime Column:
 ```go
