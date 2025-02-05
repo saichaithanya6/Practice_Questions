@@ -276,6 +276,7 @@ def find_products(products: pd.DataFrame) -> pd.DataFrame:
 
 ## Question 11:
 Write a solution to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead.
+
 ![image](https://github.com/user-attachments/assets/836caea5-f8b6-4722-95af-1688bda4046c)
 ```go
 def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFrame:
@@ -285,5 +286,34 @@ Used merge operation for joining the tables. In the parameters, mentioned 'left'
 
 What if we have the column names different for the 2 tables?- then mention "left_on" and "right_on" parameters instead of only "on="
 
+## Question 12:
+Write a solution to find the second highest distinct salary from the Employee table. If there is no second highest salary, return "null"
 
+![image](https://github.com/user-attachments/assets/9c256a9e-c1e3-40cd-be4d-693fe89aa90a)
+```go
+def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
+    sal = employee['salary'].drop_duplicates().sort_values(ascending= False)
+
+    if len(sal) < 2:
+        return pd.DataFrame({'SecondHighestSalary': [None]})
+
+    second = sal.iloc[1]
+
+    return pd.DataFrame({'SecondHighestSalary': [second]})
+```
+Initially we are dropping duplicates, sort values on descending order. The expression 'iloc[1]' returns the second data point in the table.
+
+## Question 13:
+Write a solution to find the nth highest salary from the Employee table. If there is no nth highest salary, return null.
+
+![image](https://github.com/user-attachments/assets/115a9ccc-ca24-4bab-9d19-c880a78afb9f)
+```go
+def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
+    employee = employee['salary'].drop_duplicates().sort_values(ascending=False)
+    if N > len(employee) or N<= 0:
+        return pd.DataFrame({'getNthHighestSalary({})'.format(N): [None]})
+    
+    return pd.DataFrame({'getNthHighestSalary({})'.format(N): [employee.iloc[N-1]]})
+```
+To find the nth highest salary, first we need to remove dupllicates, sort it. After sorting we need to return 'N-1' term from the data frame.
 
