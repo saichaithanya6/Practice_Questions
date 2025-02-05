@@ -274,4 +274,16 @@ def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats']== 'Y') & (products['recyclable']== 'Y')][['product_id']]
 ```
 
+## Question 11:
+Write a solution to report the first name, last name, city, and state of each person in the Person table. If the address of a personId is not present in the Address table, report null instead.
+![image](https://github.com/user-attachments/assets/836caea5-f8b6-4722-95af-1688bda4046c)
+```go
+def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFrame:
+    return pd.merge(left= person, right= address, how= 'left', on= 'personId')[['firstName', 'lastName', 'city', 'state']]
+```
+Used merge operation for joining the tables. In the parameters, mentioned 'left' join and on which column.
+
+What if we have the column names different for the 2 tables?- then mention "left_on" and "right_on" parameters instead of only "on="
+
+
 
