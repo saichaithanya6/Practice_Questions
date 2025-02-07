@@ -318,6 +318,7 @@ def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
 To find the nth highest salary, first we need to remove dupllicates, sort it. After sorting we need to return 'N-1' term from the data frame.
 
 ##Question 14:
+
 ![image](https://github.com/user-attachments/assets/ef1b654d-cad8-4516-a6c3-200468d7e3ef)
 
 ```go
@@ -326,3 +327,12 @@ def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
 	return scores.sort_values("rank").iloc[:, [1,2]]
 ```
 rank() is a function where it provides ranking based on the quantity or char in the column. iloc[:, [1,2]] This returns the every row in the 1, 2 columns.
+
+##Question 15:
+Write a solution to find the employees who earn more than their managers.
+![image](https://github.com/user-attachments/assets/8fe72e90-b41a-4d92-95cd-a112a60c1391)
+
+def find_employees(employee: pd.DataFrame) -> pd.DataFrame:
+	df = pd.merge(left = 'employees', right = 'employees', left_on = 'manager_Id', right_on = 'id', how = 'left')
+ 	return pd.DataFrame({"Employee": df[df['salary_x'] > df['salary_y']]['name_x']})
+
