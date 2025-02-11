@@ -115,3 +115,25 @@ FROM Users
 WHERE mail REGEXP '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode[.]com$'
 ```
 In the above code, It uses the regular expression to match 0-9 nums, a-z letters and it must include @leetcode[.]com. We didn't include this inside because a char [ ] means "match any one of the characters inside it". Also ^ represents starting of the email. $ represents ending
+
+### Question4:
+Write a solution to display the records with three or more rows with consecutive id's, and the number of people is greater than or equal to 100 for each.
+
+![image](https://github.com/user-attachments/assets/d2059ca1-3dd9-4d09-980c-f82a1ef9fcfa)
+
+```go
+WITH stadium_rnk AS (SELECT *, id- rnk AS island
+FROM (SELECT id, visit_date, people, RANK() OVER(ORDER BY id) AS rnk
+FROM Stadium
+WHERE people >= 100) AS t)
+
+SELECT id, visit_date, people
+FROM stadium_rnk 
+WHERE island IN (SELECT island
+FROM stadium_rnk
+GROUP BY island
+HAVING COUNT(*) >= 3)
+ORDER BY visit_date
+```
+- Here we have ranked on id with count of people greater than or equal to 100. We group by the rank col so that we can get the rows with more than 3 ids.
+
