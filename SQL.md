@@ -137,3 +137,15 @@ ORDER BY visit_date
 ```
 - Here we have ranked on id with count of people greater than or equal to 100. We group by the rank col so that we can get the rows with more than 3 ids.
 
+- Using pandas
+```go
+def human_traffic(stadium: pd.DataFrame) -> pd.DataFrame:
+    df = stadium[stadium['people'] >= 100]
+    df['rnk']= range(len(df))
+    df['island']= df.id - df.rnk
+    df['island_cnt']= df.groupby(['island']).id.transform('count') 
+    
+    return df[df['island_cnt'] >= 3][['id', 'visit_date', 'people']].sort_values(by='visit_date')
+```
+- transform('count') returns a Series of the same length as df
+- range(len(df)) : Ranks based on length
