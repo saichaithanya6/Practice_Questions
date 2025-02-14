@@ -317,7 +317,7 @@ def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
 ```
 To find the nth highest salary, first we need to remove dupllicates, sort it. After sorting we need to return 'N-1' term from the data frame.
 
-##Question 14:
+## Question 14:
 
 ![image](https://github.com/user-attachments/assets/ef1b654d-cad8-4516-a6c3-200468d7e3ef)
 
@@ -328,7 +328,7 @@ def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
 ```
 rank() is a function where it provides ranking based on the quantity or char in the column. iloc[:, [1,2]] This returns the every row in the 1, 2 columns.
 
-##Question 15:
+## Question 15:
 Write a solution to find the employees who earn more than their managers.
 
 ![image](https://github.com/user-attachments/assets/8fe72e90-b41a-4d92-95cd-a112a60c1391)
@@ -337,7 +337,7 @@ def find_employees(employee: pd.DataFrame) -> pd.DataFrame:
 	df = pd.merge(left = 'employees', right = 'employees', left_on = 'manager_Id', right_on = 'id', how = 'left')
  	return pd.DataFrame({"Employee": df[df['salary_x'] > df['salary_y']]['name_x']})
 ```
-##Question 16:
+## Question 16:
 Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let 
 these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
 Return the indices of the two numbers, index1 and index2
@@ -362,4 +362,35 @@ class Solution(object):
 			else:
 				i += 1
 		return [i+1, j+1]
+```
+## Question 17:
+Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
 
+Return the sum of the three integers.
+
+Example 1:
+
+Input: nums = [-1,2,1,-4], target = 1, 
+Output: 2
+
+Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+
+```go
+class Solution(object):
+    def threeSumClosest(self, nums, target):
+	nums = nums.sort() # Sorting the nums array
+	diff= float('inf') #Assinging the float value to diff
+	for i in range(len(nums)- 2):
+		start = i+1 
+		end = len(nums) -1
+		while start < end:
+			sum1 = nums[start] + nums[end] + nums[i] 
+			if abs(target - diff) > abs(sum1 - target): #If the 'sum1' difference with 'target' is less than 'diff' difference with 'target' then replace diff with sum1
+				diff = sum1
+			elif sum1 > target: #Since the array is sorted, if the sum1 is greater than target then select the number 
+				end -= 1
+			elif sum1 < target:
+				start += 1
+			else:
+				return sum1
+	return diff
