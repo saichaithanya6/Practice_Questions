@@ -394,3 +394,34 @@ class Solution(object):
 			else:
 				return sum1
 	return diff
+```
+
+## Question 18:
+Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
+
+Each product is guaranteed to fit in a 32-bit integer.
+
+Follow-up: Could you solve it in O(n) time without using the division operation?
+
+Example 1:
+
+Input- nums = [1,2,4,6]
+
+Output: [48,24,12,8]
+
+```go
+class solution:
+	def productSelfExpect(self, nums: List[int]) -> List[int]:
+		out = [1] * len(nums) #Creating a list with 1's
+
+		prefix = 1
+		for i in range(nums):
+			out[i] = prefix #Assigning prefix for each element
+			prefix *= nums[i] #Multiplying the current number with prefix so that we can assign it for next number
+		postfix = 1
+		for j in range(nums(len(nums)- 1, -1, -1)): #postfix is multiplied from end
+			out[i] *= postfix #We multiply the prefixs and postfixs as output
+			postfix *= nums[i]
+		return out
+```
+	
