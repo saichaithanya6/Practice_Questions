@@ -425,3 +425,22 @@ class solution:
 		return out
 ```
 	
+## Question 19 (Dynamic)
+Given an integer array nums, find a subarray that has the largest product, and return the product.
+
+Example 1:
+
+Input: nums = [2,3,-2,4], Output: 6, Explanation: [2,3] has the largest product 6.
+
+```go
+class solution:
+	def ProductMax(self, nums: List[int]) :
+		res = 1
+		max_num, min_num = 1, 1
+		# The problem can be solved by assigning two variables min, max numbers. We use min_num because if we have -ve numbers this can be helpful.
+		for i in nums:
+			tem = max_num
+			max_num = max( max_num * i, min_num * i, i) 
+			min_num = min(tem * i, min_mun * i, i)
+			res = max(max_num, res)
+		return res
