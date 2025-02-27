@@ -444,3 +444,50 @@ class solution:
 			min_num = min(tem * i, min_mun * i, i)
 			res = max(max_num, res)
 		return res
+```
+
+## Question 20 (Binary search)
+Find Minimum in Rotated Sorted Array:
+
+Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
+
+[4,5,6,7,0,1,2] if it was rotated 4 times.
+
+Given the sorted rotated array nums of unique elements, return the minimum element of this array.
+
+You must write an algorithm that runs in O(log n) time.
+
+Example 1:
+
+Input: nums = [3,4,1,2]
+
+Output: 1
+
+Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+
+Example 2:
+
+Input: nums = [4,5,6,7,0,1,2]
+
+Output: 0
+
+Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.
+```go
+class solution(object):
+	def findMin(self, num):
+		res= num[0]
+		l, r = 0, len(nums) - 1 #Assigning left, right values for binary search
+
+		while l <= r:
+			if num[l] < num[r]: #Check if the left num is less than right num. If true then the list is sorted
+				res= min(res, num[l])
+				break
+			m = (l + r) // 2 #Assigning the 'm' value 
+			res= min(res, num[m])
+
+			if num[m] > num[l]: #If middle num is greater than left num then we can assign the left num, the next value of the middle num. This is example 2 case.
+				l = m+1
+			else: # This is example where the middle num is the lesser value
+				r = m -1
+		return res
+```
