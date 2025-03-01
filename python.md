@@ -491,3 +491,49 @@ class solution(object):
 				r = m -1
 		return res
 ```
+
+Binary Search Case 2:
+![image](https://github.com/user-attachments/assets/a61f0a0b-c54c-4b7f-94b8-1fd86aa1a70c)
+
+In this case we are searching the lowest and highest indexes of the target element in the list.
+
+We take middle value to compare with the target and reiterate the right and left values. We search seperately for left and right indexes
+
+Question:
+
+Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+```go
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        def binary_search(nums, target, is_left):
+
+            left, right, r = 0, len(nums) - 1, -1
+
+            while left <= right: #Condition to break the loop
+                m = (left + right) // 2
+            
+                if nums[m] < target: # Checking if the target present in left or right
+                    left = m + 1
+                elif nums[m] > target:
+                    right = m - 1
+                else:
+                    r = m
+                    if is_left:
+                        right = m - 1
+                    else:
+                        left = m+ 1
+            return r
+            
+        left = binary_search(nums, target, True)
+        right = binary_search(nums, target, False)
+
+        return [left, right]
+```
