@@ -537,3 +537,48 @@ class Solution(object):
 
         return [left, right]
 ```
+
+#### Dynamic programming
+
+Breaking the problem into smaller tasks, more manageable sub-problems.
+
+Example:
+You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+ 
+
+Example 1:
+
+Input: n = 2
+
+Output: 2
+
+Explanation: There are two ways to climb to the top.
+
+1. 1 step + 1 step
+
+2. 2 steps
+
+![image](https://github.com/user-attachments/assets/3db9b77e-57fa-40c4-8d8c-1e9e573ba02c)
+
+For n= 5, we are calculating different possibilities of reaching the end as above. We can observe that the n=2 is done twice. The computation is double since n=2 is repeated. To solve this we use dynamic programming with bottom-up approach.
+
+```go
+class Solution(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        f = 1
+        s = 1
+
+	for i in range(n - 1):
+		tem = f # Restoring in temporary vaiable
+		f += s # finding the next number by adding the previous two numbers
+		s = tem
+	return f
+```
+		
