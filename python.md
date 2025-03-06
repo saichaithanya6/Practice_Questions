@@ -499,7 +499,7 @@ In this case we are searching the lowest and highest indexes of the target eleme
 
 We take middle value to compare with the target and reiterate the right and left values. We search seperately for left and right indexes
 
-Question:
+## Question 21:
 
 Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
 
@@ -542,13 +542,12 @@ class Solution(object):
 
 Breaking the problem into smaller tasks, more manageable sub-problems.
 
-Example:
+### Question 22:
 You are climbing a staircase. It takes n steps to reach the top.
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
  
-
 Example 1:
 
 Input: n = 2
@@ -582,3 +581,36 @@ class Solution(object):
 	return f
 ```
 		
+### Question 23:
+
+You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+
+Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+
+Example 1:
+
+Input: coins = [1,2,5], amount = 11
+
+Output: 3
+
+Explanation: 11 = 5 + 5 + 1
+
+![image](https://github.com/user-attachments/assets/3c50fee6-0fe3-4c80-9606-ae0fd46731b5)
+
+In the above, we store the outputs of each number until the result in 'dp' array so that the dynamic programming is done. 
+```go
+class Solution(object):
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+	dp = [amount + 1] * (amount + 1)
+	dp[0] = 0
+	for i in range(1, amount+1):
+		for c in coins:
+			if i - c >= 0:
+				dp[i] = min(dp[i], 1+ dp[ i-c])
+	return dp[amount + 1] if dp[amount+1] != amount +1 else -1
+```
