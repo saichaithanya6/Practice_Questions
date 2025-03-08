@@ -28,6 +28,7 @@ class Solution(object):
           else:
             cur.next = list1
             list1 = list1.next
+          cur= cur.next
 
         if list1: #The last node will be remaining, so we dump it if any of the nodes are left in the list
           cur.next = list1
@@ -35,4 +36,19 @@ class Solution(object):
           cur.next = list2
 
         return dummy.next
-        
+ ```
+Understanding cur.next in cur.next = list2 or cur.next = list1
+
+In a singly linked list, each node has:
+
+* A value (val)
+* A pointer to the next node (next)
+
+What Does cur.next Do?
+
+cur.next refers to the next node in the linked list after cur. When we write:       
+
+Why cur = cur.next is Necessary
+- After linking cur.next to a node, we need to move cur forward to continue building the merged list. If we don't, all subsequent assignments (cur.next = ...) will keep modifying cur.next of the same node, breaking the linked list structure.
+  
+![image](https://github.com/user-attachments/assets/1392aeb0-0bfb-4039-96bb-aa5e24d55944)
