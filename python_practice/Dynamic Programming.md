@@ -152,3 +152,50 @@ def longestCommonSubsequence(self, text1, text2):
             else:
               matrix[i][j] = max(matrix[i+1][j], matrix[i][j+1])
         return matrix[0][0]
+```
+### Question 6:
+Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+
+Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+Example 1:
+
+Input: s = "leetcode", wordDict = ["leet","code"]
+```
+Output: true
+Explanation: Return true because "leetcode" can be segmented as "leet code".
+Example 2:
+```
+Input: s = "applepenapple", wordDict = ["apple","pen"]
+```
+Output: true
+Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+Note that you are allowed to reuse a dictionary word.
+```
+
+![image](https://github.com/user-attachments/assets/ffd54a15-7b02-403e-80e5-566df0c9d708)
+
+In the above example, we have 5 words in wordDict. In normal brut force, we compare each word in the string which makes the compution time more. Every time you are trying to find if the wordDict are in string or not. Using DP, we can minimise the computation time by memorization and segmentation.
+
+![image](https://github.com/user-attachments/assets/4c02c33e-6c9e-4f3d-a46f-f745659f4bb0)
+
+In the above, the 'dog' in the string is matched with the wordDict but to return true in '9' we need to the check if the '6' is true or not to continous segmentation in the string.
+```
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+	res = [False] * (len(s) +1) #Creating a dummy list with all false
+	res[len(s)] = True #Assigning the last string element as true
+	for i in range(len(s) -1, -1, -1):
+		for j in wordDict:
+			if i + len(j) <= len(s) AND s[i: len(j) + i] == j:
+# Checking from last if the string as any wordDict words. If yes then it would take the result element in res after the len(wordDic] which is assigned true at last for continuation of not breaking the segmentation of the string. (Bottom- up approach)
+				res[i] = res[i + len(j)]
+			if res[i]:
+				break
+	return res[0]
+```
