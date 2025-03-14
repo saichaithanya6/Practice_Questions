@@ -199,3 +199,39 @@ class Solution(object):
 				break
 	return res[0]
 ```
+### Question 7:
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+
+Output: 4
+
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3)
+
+Total amount you can rob = 1 + 3 = 4.
+
+![image](https://github.com/user-attachments/assets/04221965-5b74-4c0d-804b-98bea5793aef)
+
+In the above example, Lets assume two numbers rob1, rob2 which are assigned to '0'. We go number by number in the list to assign rob1 and rob2 the numbers where we compare the maximum of the sum.
+
+In the abpve, rob1 is '1' and  rob2 is '2'. The number max would be max(rob1 + 3, rob2). Then we go to next values till the end.
+```
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+	rob1, rob2 = 0, 0
+
+	for n in nums:
+		tem = max(n+rob1, rob2)
+		rob1 = rob2
+		rob2 = tem
+	return rob2
+```
