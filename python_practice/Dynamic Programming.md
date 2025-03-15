@@ -219,7 +219,7 @@ Total amount you can rob = 1 + 3 = 4.
 
 In the above example, Lets assume two numbers rob1, rob2 which are assigned to '0'. We go number by number in the list to assign rob1 and rob2 the numbers where we compare the maximum of the sum.
 
-In the abpve, rob1 is '1' and  rob2 is '2'. The number max would be max(rob1 + 3, rob2). Then we go to next values till the end.
+In the above, rob1 is '1' and  rob2 is '2'. The number max would be max(rob1 + 3, rob2). Then we go to next values till the end.
 ```
 class Solution(object):
     def rob(self, nums):
@@ -234,4 +234,31 @@ class Solution(object):
 		rob1 = rob2
 		rob2 = tem
 	return rob2
+```
+
+- What if the houses are in a circle?
+#### Example 1:
+
+Input: nums = [2,3,2]
+
+Output: 3
+
+Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+
+```go
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        return max( self.helper(nums[1:]), self.helper(nums[:-1]), nums[0])
+
+	def helper(self, nums):
+		rob1, rob2 = 0, 0
+		for i in nums:
+			nr = max(rob1 + i, rob2)
+			rob1 = rob2
+			rob2 = nr
+		return rob2
 ```
